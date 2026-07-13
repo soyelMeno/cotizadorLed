@@ -28,7 +28,7 @@ function escribirDocumento(iframe, html) {
       <html><head>
         <meta charset="UTF-8">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="${window.location.origin}/src/css/proposal.css">
+        <style>${proposalCSS}</style>
       </head>
       <body>${html}</body></html>
     `);
