@@ -1,0 +1,1017 @@
+/* ==========================================================
+   PROPOSAL DOCUMENT
+   AC LED STUDIO
+   ========================================================== */
+
+
+/* ==========================================================
+   VARIABLES
+   ========================================================== */
+
+:root{
+
+    --paper:#FFFFFF;
+
+    --background:#F4F4F4;
+
+    --text:#171717;
+
+    --text-light:#626262;
+
+    --border:#E7E7E7;
+
+    --divider:#EFEFEF;
+
+    --green:#57B36B;
+
+    --green-soft:#EDF8F0;
+
+    --led:#F8F4E8;
+
+    --aluminum:#ECECEC;
+
+    --radius:12px;
+
+    --shadow:
+        0 6px 24px rgba(0,0,0,.05);
+
+    --page-width:210mm;
+
+    --page-height:297mm;
+
+}
+
+
+/* ==========================================================
+   RESET
+   ========================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+
+    font-size:16px;
+
+}
+
+body{
+
+    font-family:"Inter",sans-serif;
+
+    background:var(--background);
+
+    color:var(--text);
+
+    -webkit-font-smoothing:antialiased;
+
+    text-rendering:optimizeLegibility;
+
+    display:flex;
+
+    justify-content:center;
+
+    padding:30px;
+
+}
+
+
+
+/* ==========================================================
+   DOCUMENTO
+   ========================================================== */
+
+.proposal{
+
+    width:var(--page-width);
+
+    min-height:var(--page-height);
+
+    background:var(--paper);
+
+    padding:22mm;
+
+    box-shadow:var(--shadow);
+
+}
+
+
+
+/* ==========================================================
+   TIPOGRAFÍA
+   ========================================================== */
+
+h1,h2,h3,h4{
+
+    font-weight:600;
+
+    color:var(--text);
+
+}
+
+p{
+
+    color:var(--text-light);
+
+    font-size:.95rem;
+
+    line-height:1.8;
+
+}
+
+strong{
+
+    color:var(--text);
+
+    font-weight:600;
+
+}
+
+
+
+/* ==========================================================
+   DIVISORES
+   ========================================================== */
+
+.section-divider{
+
+    margin:34px 0;
+
+    border:none;
+
+    border-top:1px solid var(--divider);
+
+}
+
+
+
+/* ==========================================================
+   HEADER
+   ========================================================== */
+
+.proposal-header{
+
+    display:grid;
+
+    grid-template-columns:240px 1px 1fr;
+
+    gap:34px;
+
+    align-items:center;
+
+}
+
+
+
+/* ==========================================================
+   MARCA
+   ========================================================== */
+
+.brand-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+}
+
+.brand-logo{
+
+    width:170px;
+
+    object-fit:contain;
+
+}
+
+.brand-caption{
+
+    margin-top:14px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:4px;
+
+}
+
+.brand-caption span{
+
+    font-size:.68rem;
+
+    letter-spacing:.28em;
+
+    color:#777;
+
+    text-transform:uppercase;
+
+}
+
+
+
+/* ==========================================================
+   DIVISOR VERTICAL
+   ========================================================== */
+
+.header-divider{
+
+    width:1px;
+
+    align-self:stretch;
+
+    background:var(--divider);
+
+}
+
+
+
+/* ==========================================================
+   INFORMACIÓN
+   ========================================================== */
+
+.proposal-information{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+/* ==========================================================
+   TITULO
+   ========================================================== */
+
+.proposal-title{
+
+    font-size:2rem;
+
+    font-weight:300;
+
+    letter-spacing:.08em;
+
+    margin-bottom:28px;
+
+}
+
+
+
+/* ==========================================================
+   TABLA DE DATOS
+   ========================================================== */
+
+.proposal-data{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:18px 42px;
+
+}
+
+
+
+.proposal-row{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+.label{
+
+    font-size:.68rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:.22em;
+
+    color:#8B8B8B;
+
+    margin-bottom:6px;
+
+}
+
+
+
+.value{
+
+    font-size:1rem;
+
+    color:var(--text);
+
+    font-weight:500;
+
+}
+
+
+
+/* ==========================================================
+   SECCIONES
+   ========================================================== */
+
+.section-title{
+
+    font-size:.78rem;
+
+    letter-spacing:.30em;
+
+    color:#7A7A7A;
+
+    font-weight:700;
+
+    margin-bottom:20px;
+
+}
+
+
+
+/* ==========================================================
+   ALCANCE
+   ========================================================== */
+
+.project-scope{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+.scope-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    max-width:92%;
+
+}
+
+
+
+.scope-content p{
+
+    text-align:justify;
+
+}
+
+
+
+/* ==========================================================
+   RESULTADO DEL ANÁLISIS
+   ========================================================== */
+
+.project-analysis{
+
+    margin-top:42px;
+
+}
+
+.analysis-header{
+
+    margin-bottom:28px;
+
+}
+
+.section-description{
+
+    max-width:92%;
+
+    color:var(--text-light);
+
+}
+
+
+
+/* ==========================================================
+   GRID
+   ========================================================== */
+
+.analysis-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:14px;
+
+}
+
+
+
+/* ==========================================================
+   TARJETAS
+   ========================================================== */
+
+.analysis-card{
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius);
+
+    padding:16px;
+
+    background:white;
+
+    min-height:150px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    transition:.2s ease;
+
+}
+
+.analysis-card:hover{
+
+    border-color:#D8D8D8;
+
+}
+
+
+
+/* ==========================================================
+   FILA SUPERIOR (icono + cantidad)
+   ========================================================== */
+
+.analysis-top{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:14px;
+
+}
+
+
+
+/* ==========================================================
+   ICONOS
+   ========================================================== */
+
+.analysis-icon{
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+
+    background:#F8F8F8;
+
+    color:#8A8A8A;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
+
+}
+
+.analysis-icon.dark{
+
+    background:#EFEFEF;
+
+    color:#666;
+
+}
+
+.analysis-card.led .analysis-icon{
+
+    background:var(--led);
+
+    color:#B8962F;
+
+}
+
+.analysis-card.aluminum .analysis-icon{
+
+    background:var(--aluminum);
+
+}
+
+.analysis-card.installation .analysis-icon{
+
+    background:#F5F5F5;
+
+}
+
+.analysis-icon svg{
+
+    width:20px;
+
+    height:20px;
+
+}
+
+
+
+/* ==========================================================
+   CANTIDAD
+   ========================================================== */
+
+.analysis-value{
+
+    font-size:1.7rem;
+
+    font-weight:300;
+
+    color:var(--text);
+
+    line-height:1;
+
+}
+
+.analysis-value.installation{
+
+    font-size:1.1rem;
+
+    font-weight:600;
+
+}
+
+
+
+/* ==========================================================
+   TITULO
+   ========================================================== */
+
+.analysis-label{
+
+    font-size:.68rem;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+
+    color:#777;
+
+    line-height:1.4;
+
+}
+
+
+
+/* ==========================================================
+   DIVISOR
+   ========================================================== */
+
+.analysis-divider{
+
+    margin-top:auto;
+
+    padding-top:14px;
+
+    border-top:1px solid var(--divider);
+
+}
+
+
+
+/* ==========================================================
+   PRECIO
+   ========================================================== */
+
+.analysis-price{
+
+    margin-top:10px;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    color:var(--text);
+
+    text-align:center;
+
+}
+
+
+
+/* ==========================================================
+   RESUMEN + CONDICIONES
+   ========================================================== */
+
+.proposal-closing{
+
+    margin-top:42px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:42px;
+
+}
+
+
+
+/* ==========================================================
+   RESUMEN
+   ========================================================== */
+
+.economic-summary{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.summary-table{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.summary-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:10px 0;
+
+    font-size:.95rem;
+
+}
+
+.summary-row span{
+
+    color:var(--text-light);
+
+}
+
+.summary-row strong{
+
+    font-weight:600;
+
+    color:var(--text);
+
+}
+
+.summary-divider{
+
+    border-top:1px solid var(--divider);
+
+    margin:12px 0;
+
+}
+
+.summary-total{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-end;
+
+    margin-top:18px;
+
+    padding-top:18px;
+
+    border-top:2px solid var(--text);
+
+}
+
+.summary-total span{
+
+    font-size:.80rem;
+
+    letter-spacing:.18em;
+
+    text-transform:uppercase;
+
+    color:#666;
+
+}
+
+.summary-total strong{
+
+    font-size:2rem;
+
+    font-weight:300;
+
+    color:var(--text);
+
+}
+
+
+
+/* ==========================================================
+   CONDICIONES
+   ========================================================== */
+
+.proposal-conditions{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.condition{
+
+    display:flex;
+
+    gap:14px;
+
+    align-items:flex-start;
+
+}
+
+.condition-icon{
+
+    width:24px;
+
+    height:24px;
+
+    border-radius:50%;
+
+    background:#F5F5F5;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
+
+    font-size:.75rem;
+
+    color:#666;
+
+}
+
+.condition-icon.success{
+
+    background:var(--green-soft);
+
+    color:var(--green);
+
+}
+
+.condition strong{
+
+    display:block;
+
+    margin-bottom:5px;
+
+    font-size:.90rem;
+
+}
+
+.condition p{
+
+    font-size:.82rem;
+
+    line-height:1.7;
+
+}
+
+
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+
+.proposal-footer{
+
+    margin-top:48px;
+
+    padding-top:24px;
+
+    border-top:1px solid var(--divider);
+
+    text-align:center;
+
+}
+
+.footer-divider{
+
+    width:70px;
+
+    height:2px;
+
+    background:var(--divider);
+
+    margin:0 auto 24px auto;
+
+}
+
+.proposal-quote{
+
+    font-size:1.05rem;
+
+    font-style:italic;
+
+    font-weight:300;
+
+    color:#444;
+
+    margin-bottom:18px;
+
+}
+
+.footer-message{
+
+    font-size:.90rem;
+
+    color:var(--text-light);
+
+    max-width:480px;
+
+    margin:0 auto;
+
+    line-height:1.7;
+
+}
+
+.footer-brand{
+
+    margin-top:26px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:12px;
+
+    opacity:.70;
+
+}
+
+.footer-brand img{
+
+    height:28px;
+
+}
+
+.footer-brand span{
+
+    font-size:.72rem;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+
+    color:#777;
+
+}
+
+
+
+/* ==========================================================
+   PEQUEÑAS UTILIDADES
+   ========================================================== */
+
+.uppercase{
+
+    text-transform:uppercase;
+
+}
+
+.text-center{
+
+    text-align:center;
+
+}
+
+.text-right{
+
+    text-align:right;
+
+}
+
+.mt-8{
+
+    margin-top:8px;
+
+}
+
+.mt-16{
+
+    margin-top:16px;
+
+}
+
+.mt-24{
+
+    margin-top:24px;
+
+}
+
+.mt-32{
+
+    margin-top:32px;
+
+}
+
+.mt-40{
+
+    margin-top:40px;
+
+}
+
+.mb-16{
+
+    margin-bottom:16px;
+
+}
+
+.mb-24{
+
+    margin-bottom:24px;
+
+}
+
+.mb-32{
+
+    margin-bottom:32px;
+
+}
+
+
+
+/* ==========================================================
+   IMPRESIÓN
+   ========================================================== */
+
+@page{
+
+    size:A4;
+
+    margin:0;
+
+}
+
+@media print{
+
+    body{
+
+        background:white;
+
+        padding:0;
+
+    }
+
+    .proposal{
+
+        width:210mm;
+
+        min-height:297mm;
+
+        margin:0;
+
+        box-shadow:none;
+
+        page-break-after:avoid;
+
+    }
+
+    .project-analysis,
+    .proposal-closing,
+    .proposal-footer{
+
+        page-break-inside:avoid;
+
+    }
+
+    .analysis-card{
+
+        break-inside:avoid;
+
+    }
+
+}

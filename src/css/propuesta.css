@@ -1,0 +1,200 @@
+#propuesta-doc {
+  --p-ink: #1E1D1A;
+  --p-ink-soft: #8C8A80;
+  --p-line: #EAE7DE;
+  --p-circle: #F5F3EE;
+  --p-accent: #A3702E;
+  --p-total-bg: #F8F6F1;
+}
+
+#propuesta-doc {
+  background: #FFFFFF;
+  padding: 56px 48px;
+  color: var(--p-ink);
+  font-family: 'Inter', sans-serif;
+  margin-top: 20px;
+}
+@media (min-width: 640px) { #propuesta-doc { padding: 72px 68px; } }
+
+/* ---- Header ---- */
+.doc-header {
+  display: grid;
+  grid-template-columns: 1fr 1px 1.3fr;
+  gap: 32px;
+  align-items: start;
+}
+@media (max-width: 560px) { .doc-header { grid-template-columns: 1fr; } .doc-header-divider { display: none; } }
+
+.doc-logo-slot { display: flex; flex-direction: column; justify-content: center; min-height: 90px; }
+.doc-logo-slot img { max-width: 100%; max-height: 90px; object-fit: contain; }
+.doc-logo-placeholder {
+  font-family: 'Inter', sans-serif;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--p-ink-soft);
+  border: 1px dashed var(--p-line);
+  border-radius: 6px;
+  padding: 24px 10px;
+  text-align: center;
+  line-height: 1.5;
+}
+.doc-header-divider { background: var(--p-line); }
+
+.doc-info h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin: 0 0 18px;
+  color: var(--p-ink);
+}
+.doc-info-grid { display: grid; grid-template-columns: 90px 1fr; row-gap: 8px; font-size: 13.5px; }
+.doc-info-grid span:nth-child(odd) { color: var(--p-ink-soft); }
+.doc-info-grid span:nth-child(even) { font-weight: 500; }
+
+.doc-rule { border: none; border-top: 1px solid var(--p-line); margin: 48px 0 42px; }
+
+/* ---- Secciones ---- */
+.doc-section { margin-bottom: 48px; }
+.doc-section h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  margin: 0 0 20px;
+  color: var(--p-ink);
+}
+.doc-section p { font-size: 14px; line-height: 1.75; color: var(--p-ink); margin: 0 0 12px; }
+
+/* ---- Tarjetas de análisis ---- */
+.analisis-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 640px) { .analisis-grid { grid-template-columns: 1fr 1fr; } }
+
+.analisis-card {
+  border: none;
+  border-radius: 14px;
+  padding: 24px 22px;
+  box-shadow: 0 1px 2px rgba(30,29,26,0.05), 0 1px 8px rgba(30,29,26,0.04);
+}
+
+/* Un solo tono de círculo para las 6 tarjetas: consistencia > variedad */
+.analisis-icono {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--p-circle);
+  color: var(--p-ink);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+}
+.analisis-icono.gris,
+.analisis-icono.crema,
+.analisis-icono.oscuro { background: var(--p-circle); color: var(--p-ink); }
+
+.analisis-valor {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 27px;
+  line-height: 1;
+  display: flex; align-items: baseline; gap: 4px;
+  color: var(--p-ink);
+}
+.analisis-valor .unidad { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: var(--p-ink-soft); }
+.analisis-etiqueta { font-size: 10.5px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--p-ink-soft); margin-top: 6px; }
+.analisis-card hr { border: none; border-top: 1px solid var(--p-line); margin: 16px 0; }
+.analisis-precio { font-size: 13.5px; font-weight: 500; color: var(--p-ink); }
+
+/* ---- Columnas inferiores ---- */
+.doc-columnas { display: grid; grid-template-columns: 1fr 1.3fr; gap: 52px; }
+@media (max-width: 640px) { .doc-columnas { grid-template-columns: 1fr; } }
+
+.resumen-linea { display: flex; justify-content: space-between; font-size: 13.5px; padding: 9px 0; }
+.resumen-linea span:first-child { color: var(--p-ink-soft); }
+.resumen-linea span:last-child { font-weight: 500; color: var(--p-ink); }
+.resumen-economico hr { border: none; border-top: 1px solid var(--p-line); margin: 8px 0; }
+
+.resumen-total {
+  display: flex; justify-content: space-between; align-items: baseline;
+  background: var(--p-total-bg);
+  border-radius: 10px;
+  padding: 20px 22px;
+  margin-top: 18px;
+}
+.resumen-total span:first-child { font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--p-ink-soft); }
+.resumen-total span:last-child { font-family: 'Space Grotesk', sans-serif; font-size: 29px; font-weight: 700; color: var(--p-accent); }
+
+/* ---- Proceso ---- */
+.proceso-item { display: flex; gap: 16px; margin-bottom: 24px; }
+.proceso-item:last-child { margin-bottom: 0; }
+.proceso-icono {
+  width: 34px; height: 34px; flex-shrink: 0; border-radius: 50%;
+  background: var(--p-circle);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--p-ink);
+}
+.proceso-item h3 { font-size: 13.5px; font-weight: 600; margin: 5px 0 6px; color: var(--p-ink); }
+.proceso-item p { font-size: 12.5px; line-height: 1.65; color: var(--p-ink-soft); margin: 0; }
+.proceso-item strong { color: var(--p-ink); font-weight: 500; }
+
+/* ---- Footer ---- */
+.doc-footer { text-align: center; margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--p-line); }
+.doc-footer .gracias {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 17px;
+  font-weight: 500;
+  margin: 0 0 8px;
+  color: var(--p-ink);
+}
+.doc-footer .gracias strong { font-style: normal; font-weight: 600; }
+.doc-footer .tagline { font-size: 12px; color: var(--p-ink-soft); margin: 0; line-height: 1.6; }
+
+/* ---- Impresión: solo el documento, nada más de la app ---- */
+@media print {
+  @page { margin: 8mm; }
+
+  .no-imprimir { display: none !important; }
+  body { background: white; margin: 0; padding: 0; }
+  .page { display: block !important; max-width: 100%; padding: 0; margin: 0; }
+  #ticket-seccion { border: none; padding: 0; margin: 0; }
+
+  #propuesta-doc { border: none; margin: 0; padding: 8px 6px; font-size: 12.5px; }
+
+  .doc-header { gap: 18px; }
+  .doc-logo-placeholder { padding: 12px 8px; font-size: 9px; }
+  .doc-info h1 { font-size: 17px; margin-bottom: 12px; }
+  .doc-info-grid { font-size: 12px; row-gap: 4px; }
+  .doc-rule { margin: 18px 0 16px; }
+
+  .doc-section { margin-bottom: 20px; }
+  .doc-section h2 { font-size: 11.5px; margin-bottom: 10px; }
+  .doc-section p { font-size: 11.5px; line-height: 1.45; margin-bottom: 6px; }
+
+  .analisis-grid { gap: 10px; }
+  .analisis-card { padding: 12px; box-shadow: none; border: 1px solid var(--p-line); }
+  .analisis-icono { width: 26px; height: 26px; margin-bottom: 8px; }
+  .analisis-icono svg { width: 15px; height: 15px; }
+  .analisis-valor { font-size: 18px; }
+  .analisis-etiqueta { font-size: 9px; margin-top: 3px; }
+  .analisis-card hr { margin: 8px 0; }
+  .analisis-precio { font-size: 11.5px; }
+
+  .doc-columnas { gap: 26px; }
+  .resumen-linea { font-size: 11.5px; padding: 4px 0; }
+  .resumen-total { padding: 10px 12px; margin-top: 8px; }
+  .resumen-total span:last-child { font-size: 19px; }
+
+  .proceso-item { gap: 10px; margin-bottom: 8px; }
+  .proceso-icono { width: 24px; height: 24px; }
+  .proceso-icono svg { width: 13px; height: 13px; }
+  .proceso-item h3 { font-size: 11.5px; margin: 2px 0 3px; }
+  .proceso-item p { font-size: 10.5px; line-height: 1.4; }
+
+  .doc-footer { margin-top: 12px; padding-top: 8px; }
+  .doc-footer .gracias { font-size: 12.5px; }
+  .doc-footer .tagline { font-size: 10px; }
+
+  .doc-header, .doc-section, .doc-columnas,
+  .analisis-card, .proceso-item, .doc-footer {
+    break-inside: avoid;
+  }
+}
