@@ -8,8 +8,8 @@ export function construirHTMLPropuesta(propuesta) {
   const hayCliente = propuesta.cliente && propuesta.cliente !== '—';
 
   const saludo = hayCliente
-    ? `Hola <strong>${propuesta.cliente}</strong>. Realizamos el análisis técnico del proyecto para definir la solución de iluminación más adecuada. Este proceso contempla la optimización del sistema, el aprovechamiento eficiente de los materiales y la asesoría durante el diseño del mueble para garantizar una integración eléctrica discreta, segura y duradera.`
-    : `Realizamos el análisis técnico del proyecto para definir la solución de iluminación más adecuada. Este proceso contempla la optimización del sistema, el aprovechamiento eficiente de los materiales y la asesoría durante el diseño del mueble para garantizar una integración eléctrica discreta, segura y duradera.`;
+    ? `Hola <strong>${propuesta.cliente}</strong>. Realizamos el análisis técnico para definir una solución que contempla la optimización del sistema, el aprovechamiento eficiente de los materiales y acompañamiento durante el diseño del mueble para garantizar una circuito eléctrico discreto, seguro y duradero.`
+    : `Realizamos el análisis técnico para definir una solución que contempla la optimización del sistema, el aprovechamiento eficiente de los materiales y acompañamiento durante el diseño del mueble para garantizar una circuito eléctrico discreto, seguro y duradero.`;
 
   return `
 <main class="proposal">
@@ -48,7 +48,7 @@ export function construirHTMLPropuesta(propuesta) {
   <section class="project-analysis">
     <header class="analysis-header">
       <h2 class="section-title">RESULTADO DEL ANÁLISIS</h2>
-      <p class="section-description">Derivado del análisis de los requerimientos del proyecto, se especifican los materiales y componentes necesarios para la implementación del sistema de iluminación propuesto.</p>
+      <p class="section-description">Derivado del análisis de requerimientos, se especifican los materiales y componentes necesarios para la implementación del sistema de iluminación propuesto.</p>
     </header>
 
     <div class="analysis-grid">
