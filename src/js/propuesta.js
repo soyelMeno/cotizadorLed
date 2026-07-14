@@ -49,7 +49,7 @@ export function generarPropuesta({ cliente, folio, canaleta, tira, resultadoCoti
       tiras: { valor: resultadoCorte.resumen.cantTiras, precio: tiraCosto, nombre: tira.descripcion },
       fuentes: { valor: fuentesCantidad, precio: fuentesCosto },
       cable: { valor: cableMetros, precio: cableCosto },
-      instalacion: { valor: 'Incluidos', precio: instalacionCosto },
+      instalacion: { valor: 'Adicionales', precio: instalacionCosto },
     },
 
     resumen: { materiales, instalacion: instalacionCosto, manoDeObra, subtotal, iva, total },
