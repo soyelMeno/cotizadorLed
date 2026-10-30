@@ -458,42 +458,33 @@ details[open] .chevron { transform: rotate(180deg); }
 }
 .adicionales-total strong { font-family: 'IBM Plex Mono', monospace; color: var(--green); }
 
-/* ---- Ticket final ---- */
-.ticket {
-  max-width: 380px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px dashed var(--line);
-  border-radius: 10px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 13px;
-}
-.ticket-header { text-align: center; margin-bottom: 4px; }
-.ticket-header h3 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 15px;
-  margin: 0 0 2px;
-}
-.ticket-header p { margin: 0; color: var(--ink-soft); font-size: 12px; }
-.ticket-separador { border-top: 1px dashed var(--line); margin: 10px 0; }
-.ticket-fila { display: flex; justify-content: space-between; gap: 8px; padding: 3px 0; }
-.ticket-cant { color: var(--ink-soft); font-size: 12px; }
-.ticket-total { font-weight: 600; font-size: 15px; }
-.ticket-total span:last-child { color: var(--green); }
-
+/* ---- Botón de imprimir ---- */
 #btn-imprimir {
   max-width: 380px;
-  margin: 12px auto 0;
+  margin: 16px auto 0;
   display: block;
 }
 
-@media print {
-  body * { visibility: hidden; }
-  #ticket-contenido, #ticket-contenido * { visibility: visible; }
-  #ticket-contenido {
-    position: absolute;
-    left: 0; top: 0;
-    width: 100%;
-    border: none;
-  }
+/* ---- Checkbox 'Usar canaleta' y aviso de compatibilidad ---- */
+.check-canaleta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
+.check-canaleta input { width: 17px; height: 17px; accent-color: var(--copper); cursor: pointer; }
+.check-canaleta input:disabled { cursor: not-allowed; }
+.check-canaleta input:disabled ~ span { opacity: .5; }
+
+.aviso-compatibilidad {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin: 6px 0 0;
+  min-height: 16px;
+}
+
+.selector-input:disabled { background: var(--line-soft); color: var(--ink-soft); cursor: not-allowed; }

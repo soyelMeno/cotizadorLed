@@ -2,6 +2,7 @@ const estado = {
   canaleta: null,
   tira: null,
   piezas: [],
+  usaCanaleta: true,
   resultadoCotizacion: null,  // { resultadoCorte, conectores, silicon }
   resultadoAdicionales: null, // { cables, modulos, costoTotal }
 };
@@ -39,6 +40,14 @@ export function setResultadoAdicionales(resultado) {
 
 export function getResultadoAdicionales() {
   return estado.resultadoAdicionales;
+}
+
+export function setUsaCanaleta(valor) {
+  estado.usaCanaleta = valor;
+}
+
+export function getUsaCanaleta() {
+  return estado.usaCanaleta;
 }
 
 export function onCambioSeleccion(fn) {

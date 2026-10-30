@@ -16,10 +16,12 @@ function fechaLarga() {
   return new Date().toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
-export function generarPropuesta({ cliente, folio, canaleta, tira, resultadoCotizacion, resultadoAdicionales, manoDeObra }) {
+export function generarPropuesta({ cliente, folio, canaleta, tira, resultadoCotizacion, resultadoAdicionales, manoDeObra, usaCanaleta}) {
   const { resultadoCorte, conectores, silicon } = resultadoCotizacion;
 
-  const canaletaCosto = Number((resultadoCorte.resumen.cantCanaletas * canaleta.precioVenta).toFixed(2));
+  const canaletaCosto = usaCanaleta
+    ? Number((resultadoCorte.resumen.cantCanaletas * canaleta.precioVenta).toFixed(2))
+    : 0;
   const tiraCosto = Number((resultadoCorte.resumen.cantTiras * tira.precioVenta).toFixed(2));
 
   const cablesLineas = resultadoAdicionales?.cables?.lineas || [];
@@ -45,7 +47,9 @@ export function generarPropuesta({ cliente, folio, canaleta, tira, resultadoCoti
 
     tarjetas: {
       metrosLineales: { valor: resultadoCorte.resumen.metrosLineales },
-      canaletas: { valor: resultadoCorte.resumen.cantCanaletas, precio: canaletaCosto, nombre: canaleta.descripcion },
+      canaletas: usaCanaleta
+        ? { valor: resultadoCorte.resumen.cantCanaletas, precio: canaletaCosto, nombre: canaleta.descripcion }
+        : null,
       tiras: { valor: resultadoCorte.resumen.cantTiras, precio: tiraCosto, nombre: tira.descripcion },
       fuentes: { valor: fuentesCantidad, precio: fuentesCosto },
       cable: { valor: cableMetros, precio: cableCosto },

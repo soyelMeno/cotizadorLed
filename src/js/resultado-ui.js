@@ -63,13 +63,18 @@ function renderGrupo(contenedorId, conteoId, bins, stockLength, prefijo) {
   });
 }
 
-export function renderResultado(resultado, { stockCanaleta, stockTira }) {
+export function renderResultado(resultado, { stockCanaleta, stockTira, usaCanaleta = true }) {
   document.getElementById('r-metros').textContent = resultado.resumen.metrosLineales;
-  document.getElementById('r-canaletas').textContent = resultado.resumen.cantCanaletas;
+  document.getElementById('r-canaletas').textContent = usaCanaleta ? resultado.resumen.cantCanaletas : '—';
   document.getElementById('r-tiras').textContent = resultado.resumen.cantTiras;
   document.getElementById('r-piezas').textContent = resultado.resumen.totalPiezas;
 
-  renderGrupo('grupo-canaletas', 'conteo-canaletas', resultado.canaletas, stockCanaleta, 'Canaleta');
+  const grupoCanaletas = document.querySelector('details.grupo.canaletas');
+  grupoCanaletas.hidden = !usaCanaleta;
+  if (usaCanaleta) {
+    renderGrupo('grupo-canaletas', 'conteo-canaletas', resultado.canaletas, stockCanaleta, 'Canaleta');
+  }
+
   renderGrupo('grupo-tiras', 'conteo-tiras', resultado.tiras, stockTira, 'Led');
 
   document.getElementById('resultado-vacio').hidden = true;

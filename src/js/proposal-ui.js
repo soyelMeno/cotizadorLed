@@ -43,6 +43,34 @@ function escribirDocumento(iframe, html) {
   });
 }
 
+function esMovil() {
+  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+}
+
+async function entregarPDF(blob, nombreArchivo) {
+  if (esMovil() && navigator.canShare) {
+    const archivo = new File([blob], nombreArchivo, { type: 'application/pdf' });
+    if (navigator.canShare({ files: [archivo] })) {
+      try {
+        await navigator.share({ files: [archivo], title: 'Propuesta Económica' });
+        return;
+      } catch (err) {
+        if (err.name === 'AbortError') return; // el usuario canceló el panel, no hacemos nada más
+        // si falla por cualquier otra razón, seguimos abajo con la descarga normal
+      }
+    }
+  }
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = nombreArchivo;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
 async function generarYDescargarPDF(html, folio) {
   const iframe = crearIframeOculto();
 
@@ -66,7 +94,9 @@ async function generarYDescargarPDF(html, folio) {
     const pdf = new jsPDF({ unit: 'mm', format: [anchoMM, altoMM] });
     const imgData = canvas.toDataURL('image/jpeg', 0.95);
     pdf.addImage(imgData, 'JPEG', 0, 0, anchoMM, altoMM);
-    pdf.save(`Propuesta-${folio}.pdf`);
+
+    const blob = pdf.output('blob');
+    await entregarPDF(blob, `Propuesta-${folio}.pdf`);
   } finally {
     document.body.removeChild(iframe);
   }

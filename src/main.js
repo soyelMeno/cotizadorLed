@@ -3,7 +3,7 @@ import { initSeleccion } from './js/seleccion-ui.js';
 import { initPiezas } from './js/piezas-ui.js';
 import { initModulos, getModulos } from './js/modulos-ui.js';
 import {
-  getSeleccion, getPiezas,
+  getSeleccion, getPiezas, getUsaCanaleta,
   setResultadoCotizacion, getResultadoCotizacion,
   setResultadoAdicionales, getResultadoAdicionales,
 } from './js/state.js';
@@ -13,18 +13,23 @@ import { calcularConectores, calcularSilicon } from './js/materiales-instalacion
 import { calcularAdicionales } from './js/adicionales.js';
 import { renderAdicionales } from './js/adicionales-ui.js';
 import { generarPropuesta } from './js/propuesta.js';
-import { descargarPropuesta, descargarUltimaPropuesta } from './js/proposal-ui.js';
 import { siguienteFolio } from './js/folio.js';
+import { descargarPropuesta, descargarUltimaPropuesta } from './js/proposal-ui.js';
 
 function manejarCotizar(catalogo) {
   const mensaje = document.getElementById('cotizar-mensaje');
   mensaje.textContent = '';
 
   const { canaleta, tira } = getSeleccion();
+  const usaCanaleta = getUsaCanaleta();
   const piezas = getPiezas();
 
-  if (!canaleta || !tira) {
-    mensaje.textContent = 'Selecciona canaleta y tira LED antes de cotizar.';
+  if (!tira) {
+    mensaje.textContent = 'Selecciona la tira LED antes de cotizar.';
+    return;
+  }
+  if (usaCanaleta && !canaleta) {
+    mensaje.textContent = 'Selecciona la canaleta o desmarca la casilla "Usar canaleta".';
     return;
   }
   if (piezas.length === 0) {
@@ -32,19 +37,26 @@ function manejarCotizar(catalogo) {
     return;
   }
 
+  const topeCanaleta = usaCanaleta ? canaleta.longitud : Infinity;
   const piezaDemasiadoLarga = piezas.find(
-    p => p.medida > canaleta.longitud || p.medida > tira.longitud
+    p => p.medida > topeCanaleta || p.medida > tira.longitud
   );
   if (piezaDemasiadoLarga) {
-    mensaje.textContent = `La pieza de ${piezaDemasiadoLarga.medida}cm es más larga que el material disponible (canaleta ${canaleta.longitud}cm / tira ${tira.longitud}cm).`;
+    const detalleCanaleta = usaCanaleta ? ` / canaleta ${canaleta.longitud}cm` : '';
+    mensaje.textContent = `La pieza de ${piezaDemasiadoLarga.medida}cm es más larga que el material disponible (tira ${tira.longitud}cm${detalleCanaleta}).`;
     return;
   }
 
-  const resultadoCorte = cotizar({ canaletaProducto: canaleta, tiraProducto: tira, piezas });
-  renderResultado(resultadoCorte, { stockCanaleta: canaleta.longitud, stockTira: tira.longitud });
+  const resultadoCorte = cotizar({ canaletaProducto: canaleta, tiraProducto: tira, piezas, usaCanaleta });
+  renderResultado(resultadoCorte, {
+    stockCanaleta: usaCanaleta ? canaleta.longitud : 0,
+    stockTira: tira.longitud,
+    usaCanaleta,
+  });
 
-  const conectores = calcularConectores(piezas, catalogo.conectores[0]);
-  const silicon = calcularSilicon(piezas, catalogo.silicon[0]);
+  const vacio = { cantidad: 0, costo: 0, producto: null };
+  const conectores = usaCanaleta ? calcularConectores(piezas, catalogo.conectores[0]) : vacio;
+  const silicon = usaCanaleta ? calcularSilicon(piezas, catalogo.silicon[0]) : vacio;
   setResultadoCotizacion({ resultadoCorte, conectores, silicon });
 }
 
@@ -76,6 +88,7 @@ function manejarAdicionales(catalogo) {
     catalogoCables: catalogo.cables,
     catalogoFuentes: catalogo.fuentes,
     voltajeTira: tira.voltaje,
+    wattsPorMetroTira: tira.watts,
   });
 
   renderAdicionales(resultado);
@@ -85,11 +98,12 @@ function manejarAdicionales(catalogo) {
 async function manejarPropuesta() {
   const mensaje = document.getElementById('ticket-mensaje');
   mensaje.textContent = '';
-
+  const usaCanaleta = getUsaCanaleta();
   const { canaleta, tira } = getSeleccion();
+  
   const resultadoCotizacion = getResultadoCotizacion();
 
-  if (!canaleta || !tira || !resultadoCotizacion) {
+  if (!tira || !resultadoCotizacion) {
     mensaje.textContent = 'Primero da clic en "Cotizar materiales".';
     return;
   }
@@ -106,7 +120,7 @@ async function manejarPropuesta() {
     const folio = await siguienteFolio();
 
     const propuesta = generarPropuesta({
-      cliente, folio, canaleta, tira, resultadoCotizacion, resultadoAdicionales, manoDeObra,
+      cliente, folio, canaleta, tira, resultadoCotizacion, resultadoAdicionales, manoDeObra, usaCanaleta,
     });
 
     boton.textContent = 'Generando PDF…';

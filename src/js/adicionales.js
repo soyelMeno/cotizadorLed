@@ -29,9 +29,14 @@ export function calcularCables({ metrosAC, metrosDC22, metrosDC18 }, catalogoCab
 // Programación dinámica tipo "cambio de monedas" (unbounded knapsack).
 function combinacionMinima(objetivoWatts, fuentesDisponibles) {
   if (fuentesDisponibles.length === 0) return null;
+  if (!(objetivoWatts > 0)) return null; // watts inválido (NaN, 0, negativo) -> sin cobertura, no truena
 
-  const maxWatt = Math.max(...fuentesDisponibles.map(f => f.watts));
+  const wattsValidos = fuentesDisponibles.map(f => f.watts).filter(w => w > 0);
+  if (wattsValidos.length === 0) return null;
+
+  const maxWatt = Math.max(...wattsValidos);
   const limite = objetivoWatts + maxWatt;
+  if (!Number.isFinite(limite) || limite <= 0) return null;
 
   const costoMin = new Array(limite + 1).fill(Infinity);
   const eleccion = new Array(limite + 1).fill(null);
@@ -62,25 +67,26 @@ function combinacionMinima(objetivoWatts, fuentesDisponibles) {
   return combinacion;
 }
 
-export function calcularFuentesPorModulo(modulos, catalogoFuentes, voltajeTira) {
+export function calcularFuentesPorModulo(modulos, catalogoFuentes, voltajeTira, wattsPorMetroTira) {
   const fuentesCompatibles = catalogoFuentes.filter(f => f.voltaje === voltajeTira && f.watts);
 
   return modulos.map(modulo => {
-    const objetivo = Math.ceil(modulo.watts * (1 + MARGEN_FUENTE));
+    const watts = Number((modulo.metros * wattsPorMetroTira).toFixed(1));
+    const objetivo = Math.ceil(watts * (1 + MARGEN_FUENTE));
     const combinacion = combinacionMinima(objetivo, fuentesCompatibles);
 
     if (!combinacion) {
-      return { ...modulo, objetivo, fuentes: [], costo: 0, sinCobertura: true };
+      return { ...modulo, watts, objetivo, fuentes: [], costo: 0, sinCobertura: true };
     }
 
     const costo = combinacion.reduce((acc, f) => acc + f.precioVenta, 0);
-    return { ...modulo, objetivo, fuentes: combinacion, costo, sinCobertura: false };
+    return { ...modulo, watts, objetivo, fuentes: combinacion, costo, sinCobertura: false };
   });
 }
 
-export function calcularAdicionales({ cables, modulos, catalogoCables, catalogoFuentes, voltajeTira }) {
+export function calcularAdicionales({ cables, modulos, catalogoCables, catalogoFuentes, voltajeTira, wattsPorMetroTira }) {
   const resultadoCables = calcularCables(cables, catalogoCables);
-  const resultadoModulos = calcularFuentesPorModulo(modulos, catalogoFuentes, voltajeTira);
+  const resultadoModulos = calcularFuentesPorModulo(modulos, catalogoFuentes, voltajeTira, wattsPorMetroTira);
   const costoFuentes = resultadoModulos.reduce((acc, m) => acc + m.costo, 0);
   const costoTotal = resultadoCables.costoTotal + costoFuentes;
 

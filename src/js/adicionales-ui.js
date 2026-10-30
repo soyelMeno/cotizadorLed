@@ -24,14 +24,14 @@ export function renderAdicionales(resultado) {
     if (m.sinCobertura) {
       html += `
         <div class="adicionales-resumen-fila">
-          <span>${m.nombre} (${m.watts}W) — sin fuente compatible en catálogo</span>
+          <span>${m.nombre} (${m.metros} m → ${m.watts}W) — sin fuente compatible en catálogo</span>
           <strong>—</strong>
         </div>`;
     } else {
       const detalleFuentes = m.fuentes.map(f => f.descripcion).join(' + ');
       html += `
         <div class="adicionales-resumen-fila">
-          <span>${m.nombre} (${m.watts}W → ${m.objetivo}W con margen): ${detalleFuentes}</span>
+          <span>${m.nombre} (${m.metros} m → ${m.watts}W → ${m.objetivo}W con margen): ${detalleFuentes}</span>
           <strong>${formatoMoneda(m.costo)}</strong>
         </div>`;
     }

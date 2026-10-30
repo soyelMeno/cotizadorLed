@@ -3,7 +3,7 @@ let contador = 0;
 
 function agregarFila(enfocar = false) {
   contador++;
-  const modulo = { id: contador, nombre: `Módulo ${contador}`, watts: 0 };
+  const modulo = { id: contador, nombre: `Módulo ${contador}`, metros: 0 };
   modulos.push(modulo);
 
   const contenedor = document.getElementById('modulos-lista');
@@ -12,18 +12,18 @@ function agregarFila(enfocar = false) {
 
   fila.innerHTML = `
     <input type="text" class="input-nombre" value="${modulo.nombre}" aria-label="Nombre del módulo">
-    <input type="number" min="0" step="1" class="input-watts" placeholder="watts" aria-label="Watts del módulo">
+    <input type="number" min="0" step="0.5" class="input-metros" placeholder="metros" aria-label="Metros de tira LED del módulo">
     <button type="button" class="btn-eliminar-fila" aria-label="Eliminar módulo">✕</button>
   `;
 
   const inputNombre = fila.querySelector('.input-nombre');
-  const inputWatts = fila.querySelector('.input-watts');
+  const inputMetros = fila.querySelector('.input-metros');
   const btnEliminar = fila.querySelector('.btn-eliminar-fila');
 
   inputNombre.addEventListener('input', () => { modulo.nombre = inputNombre.value; });
-  inputWatts.addEventListener('input', () => { modulo.watts = Number(inputWatts.value) || 0; });
+  inputMetros.addEventListener('input', () => { modulo.metros = Number(inputMetros.value) || 0; });
 
-  inputWatts.addEventListener('keydown', (e) => {
+  inputMetros.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       agregarFila(true);
@@ -32,9 +32,9 @@ function agregarFila(enfocar = false) {
 
   btnEliminar.addEventListener('click', () => {
     if (modulos.length === 1) {
-      modulo.watts = 0;
-      inputWatts.value = '';
-      inputWatts.focus();
+      modulo.metros = 0;
+      inputMetros.value = '';
+      inputMetros.focus();
       return;
     }
     modulos = modulos.filter(m => m.id !== modulo.id);
@@ -42,7 +42,7 @@ function agregarFila(enfocar = false) {
   });
 
   contenedor.appendChild(fila);
-  if (enfocar) inputWatts.focus();
+  if (enfocar) inputMetros.focus();
 }
 
 let inicializado = false;
@@ -55,5 +55,5 @@ export function initModulos() {
 }
 
 export function getModulos() {
-  return modulos.filter(m => m.watts > 0).map(m => ({ nombre: m.nombre, watts: m.watts }));
+  return modulos.filter(m => m.metros > 0).map(m => ({ nombre: m.nombre, metros: m.metros }));
 }

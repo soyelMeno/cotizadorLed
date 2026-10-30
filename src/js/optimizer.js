@@ -24,27 +24,12 @@ function empacar(medidas, stockLength) {
   return bins;
 }
 
-function segundaMasLarga(medidas) {
-  const unicas = [...new Set(medidas)].sort((a, b) => b - a);
-  return unicas[1] ?? unicas[0] ?? 0;
-}
-
-// Regla: desde 3 canaletas, si ninguna tiene sobrante suficiente para la
-// segunda pieza más larga (valores únicos, desc), se agrega una barra extra de respaldo.
+// Canaletas: solo empaque First Fit Decreasing, sin barra extra de respaldo.
 export function optimizarCanaletas(piezas, stockLength) {
   const medidas = expandirPiezas(piezas);
   if (medidas.length === 0) return [];
 
-  const bins = empacar(medidas, stockLength);
-
-  if (bins.length >= 3) {
-    const segunda = segundaMasLarga(medidas);
-    const hayRespaldo = bins.some(b => b.restante >= segunda);
-    if (!hayRespaldo) {
-      bins.push({ piezas: [], restante: stockLength, esExtra: true });
-    }
-  }
-  return bins;
+  return empacar(medidas, stockLength);
 }
 
 // Regla: se añade 10% de margen de desperdicio sobre el total de metros de tira LED.
@@ -78,8 +63,10 @@ export function calcularResumen({ canaletas, tiras, piezas }) {
 
 // Punto de entrada: recibe los productos seleccionados y las piezas, devuelve
 // el resultado completo listo para pasar a render().
-export function cotizar({ canaletaProducto, tiraProducto, piezas }) {
-  const canaletas = optimizarCanaletas(piezas, canaletaProducto.longitud);
+export function cotizar({ canaletaProducto, tiraProducto, piezas, usaCanaleta = true }) {
+  const canaletas = usaCanaleta && canaletaProducto
+    ? optimizarCanaletas(piezas, canaletaProducto.longitud)
+    : [];
   const tiras = optimizarTiras(piezas, tiraProducto.longitud);
   const resumen = calcularResumen({ canaletas, tiras, piezas });
   return { canaletas, tiras, resumen };

@@ -8,15 +8,30 @@ export function construirHTMLPropuesta(propuesta) {
   const hayCliente = propuesta.cliente && propuesta.cliente !== '—';
 
   const saludo = hayCliente
-    ? `Hola <strong>${propuesta.cliente}</strong>. Realizamos el análisis técnico para definir una solución que contempla la optimización del sistema, el aprovechamiento eficiente de los materiales y acompañamiento durante el diseño del mueble para garantizar una circuito eléctrico discreto, seguro y duradero.`
-    : `Realizamos el análisis técnico para definir una solución que contempla la optimización del sistema, el aprovechamiento eficiente de los materiales y acompañamiento durante el diseño del mueble para garantizar una circuito eléctrico discreto, seguro y duradero.`;
+    ? `Hola <strong>${propuesta.cliente}</strong>. Después de analizar las características de su proyecto, realizamos una estimación de los materiales y componentes necesarios para garantizar una instalación confiable, estética y duradera.`
+    : `Después de analizar las características de su proyecto, realizamos una estimación de los materiales y componentes necesarios para garantizar una instalación confiable, estética y duradera.`;
+
+  const tarjetaCanaleta = t.canaletas ? `
+      <article class="analysis-card">
+        <div class="analysis-top">
+          <div class="analysis-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4v11a5 5 0 0 0 5 5h6a5 5 0 0 0 5-5V4"/><path d="M4 4h16"/>
+            </svg>
+          </div>
+          <div class="analysis-value">${t.canaletas.valor}</div>
+        </div>
+        <div class="analysis-label">${t.canaletas.nombre.toUpperCase()}</div>
+        <div class="analysis-divider"></div>
+        <div class="analysis-price">${formatoMoneda(t.canaletas.precio)}</div>
+      </article>` : '';
 
   return `
 <main class="proposal">
 
   <header class="proposal-header">
     <section class="brand-section">
-      <img src="/logo.png" alt="AC Letreros" class="brand-logo" onerror="this.style.visibility='hidden'">
+      <img src="${window.location.origin}/logo.png" alt="AC Letreros" class="brand-logo" onerror="this.style.visibility='hidden'">
       <div class="brand-caption">
         <span>SOLUCIONES DE ILUMINACIÓN</span>
         <span>ARQUITECTÓNICA</span>
@@ -42,13 +57,14 @@ export function construirHTMLPropuesta(propuesta) {
     <h2 class="section-title">ALCANCE DEL PROYECTO</h2>
     <div class="scope-content">
       <p>${saludo}</p>
+      <p>La selección considera el rendimiento del sistema, la optimización del material, la reducción de desperdicios y una distribución adecuada de cada componente para obtener un resultado limpio, uniforme y de larga vida útil.</p>
     </div>
   </section>
 
   <section class="project-analysis">
     <header class="analysis-header">
       <h2 class="section-title">RESULTADO DEL ANÁLISIS</h2>
-      <p class="section-description">Derivado del análisis de requerimientos, se especifican los materiales y componentes necesarios para la implementación del sistema de iluminación propuesto.</p>
+      <p class="section-description">La siguiente estimación resume los principales componentes considerados para la ejecución del proyecto. La selección busca optimizar el rendimiento del sistema, reducir desperdicios y garantizar una instalación confiable y estéticamente uniforme.</p>
     </header>
 
     <div class="analysis-grid">
@@ -66,19 +82,7 @@ export function construirHTMLPropuesta(propuesta) {
         <div class="analysis-label">METROS LINEALES</div>
       </article>
 
-      <article class="analysis-card">
-        <div class="analysis-top">
-          <div class="analysis-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4v11a5 5 0 0 0 5 5h6a5 5 0 0 0 5-5V4"/><path d="M4 4h16"/>
-            </svg>
-          </div>
-          <div class="analysis-value">${t.canaletas.valor}</div>
-        </div>
-        <div class="analysis-label">${t.canaletas.nombre.toUpperCase()}</div>
-        <div class="analysis-divider"></div>
-        <div class="analysis-price">${formatoMoneda(t.canaletas.precio)}</div>
-      </article>
+      ${tarjetaCanaleta}
 
       <article class="analysis-card led">
         <div class="analysis-top">
@@ -118,7 +122,7 @@ export function construirHTMLPropuesta(propuesta) {
           </div>
           <div class="analysis-value">${t.cable.valor} m</div>
         </div>
-        <div class="analysis-label">CABLE DE COBRE EN DIVERSOS CALIBRES</div>
+        <div class="analysis-label">CABLE</div>
         <div class="analysis-divider"></div>
         <div class="analysis-price">${formatoMoneda(t.cable.precio)}</div>
       </article>
@@ -196,7 +200,7 @@ export function construirHTMLPropuesta(propuesta) {
     <blockquote class="proposal-quote">"La iluminación adecuada transforma la manera en que vivimos un espacio."</blockquote>
     <p class="footer-message">Gracias por la confianza. Esperamos tener la oportunidad de participar en la realización de su proyecto.</p>
     <div class="footer-brand">
-      <img src="/logo-gray.png" alt="AC Letreros" onerror="this.style.visibility='hidden'">
+      <img src="${window.location.origin}/logo-gray.png" alt="AC Letreros" onerror="this.style.visibility='hidden'">
       <span>Soluciones de iluminación LED personalizadas</span>
     </div>
   </footer>

@@ -26,12 +26,15 @@
 
       <div class="seleccion-grid">
         <div class="selector-bloque" data-tipo="canaleta">
-          <label class="selector-label" for="select-canaleta">
-            <span class="indicador canaleta"></span> Canaleta
+          <label class="check-canaleta">
+            <input type="checkbox" id="check-canaleta" checked>
+            <span class="indicador canaleta"></span>
+            <span>Usar canaleta</span>
           </label>
           <select id="select-canaleta" class="selector-input">
-            <option value="">Cargando…</option>
+            <option value="">Selecciona primero la tira LED…</option>
           </select>
+          <p class="aviso-compatibilidad" id="aviso-canaleta"></p>
           <div class="selector-preview" id="preview-canaleta"></div>
         </div>
 
@@ -163,10 +166,10 @@
       </div>
 
       <div class="adicionales-bloque">
-        <h3 class="bloque-titulo">Módulos y carga en watts</h3>
+        <h3 class="bloque-titulo">Módulos y metros de tira LED</h3>
         <div class="modulos-tabla-header">
           <span>Módulo</span>
-          <span>Watts</span>
+          <span>Metros</span>
           <span></span>
         </div>
         <div id="modulos-lista"></div>
